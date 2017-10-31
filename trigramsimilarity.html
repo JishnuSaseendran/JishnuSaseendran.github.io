@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<!--
+	Urban by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Trigram Similarity</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<!-- <div class="logo"><a href="index.html">Urban <span>by TEMPLATED</span></a></div> -->
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="generic.html">Trigram Similarity</a></li>
+					<!-- <li><a href="elements.html">Elements</a></li> -->
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Section -->
+					<section class="wrapper">
+						<div class="inner">
+							<header class="align-center">
+								<h1>Trigram Similarity</h1>
+								<p>November 01 2017</p>
+							</header>
+									<p>Trigram Phrase Matching is a method of identifying phrases that have a high probability of being synonyms. It is based on representing each phrase by a set of character trigrams that are extracted from that phrase. The character trigrams are used as key terms in a representation of the phrase much as words are used as key terms to represent a document. The similarity of phrases is then computed using the vector cosine similarity measure.</p>
+								<img src="images/tg.png" alt="" >
+								<p>You just have to execute the sql command to run this code, CREATE EXTENSION pg_trgm;</p>
+								<div class="flex flex-2">
+									<h2> pg_trgm </h2>
+								</div>
+								<p>The pg_trgm module provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, as well as index operator classes that support fast searching for similar strings.</p>
+								<div class="flex flex-2">
+									<h4> Trigram (or Trigraph) Concepts </h4>
+								</div>
+								<p>A trigram is a set of three consecutive characters taken	from a string.  A string is considered to have two spaces
+	prefixed and one space suffixed when determining the set
+	of trigrams that comprise the string. We can measure the similarity of two strings by counting the number of trigrams they share. This simple idea turns out to be very effective for measuring the similarity of words in many natural languages.</p>
+								<p>Note: pg_trgm ignores non-word characters (non-alphanumerics) when extracting trigrams from a string. Each word is considered to have two spaces prefixed and one space suffixed when determining the set of trigrams contained in the string. For example, the set of trigrams in the string “cat” is “ c”, “ ca”, “cat”, and “at ”. The set of trigrams in the string “foo|bar” is “ f”, “ fo”, “foo”, “oo ”, “ b”, “ ba”, “bar”, and “ar ”.</p>
+
+<div class="flex flex-2">
+	<h4> Public Functions </h4>
+</div>
+								similarity(text, text)
+
+	<p>Returns a number that indicates how closely matches the two
+	arguments are.  A zero result indicates that the two words
+	are completely dissimilar, and a result of one indicates that
+	the two words are identical.</p>
+
+	show_limit()
+
+	<p>Returns the current similarity threshold used by the '%'
+	operator.  This in effect sets the minimum similarity between
+	two words in order that they be considered similar enough to
+	be misspellings of each other, for example.</p>
+
+	set_limit(real)
+
+	<p>Sets the current similarity threshold that is used by the '%'
+	operator, and is returned by the show_limit() function.</P>
+
+	show_trgm(text)
+
+	<p>Returns an array of all the trigrams of the supplied text
+	parameter.</p>
+
+	<div class="flex flex-2">
+		<h4> Public Operators </h4>
+	</div>
+	text % text (returns boolean)
+
+	<p>The '%' operator returns TRUE if its two arguments have a similarity
+	that is greater than the similarity threshold set by set_limit(). It
+	will return FALSE if the similarity is less than the current
+	threshold.</p>
+	text <% text (returns boolean)
+	<p>Returns true if its first argument has the similar word in the second argument and they have a similarity that is greater than the current word similarity threshold set by pg_trgm.word_similarity_threshold parameter.</p>
+text %> text (returns boolean)
+<p>Commutator of the <% operator.</p>
+text <-> text (returns real)
+<p>Returns the “distance” between the arguments, that is one minus the similarity() value.</p>
+text <<-> text (returns real)
+<p>Returns the “distance” between the arguments, that is one minus the word_similarity() value.</p>
+text <->> text (returns real)
+<p>Commutator of the <<-> operator.</p>
+
+<!-- <div class="flex flex-2">
+	<h4> Public Index Operator Classes
+ </h4>
+</div>
+
+	gist_trgm_ops
+
+	<p>The pg_trgm module comes with an index operator class that allows a
+	developer to create an index over a text column for the purpose
+	of very fast similarity searches.</p>
+
+	<p>To use this index, the '%' operator must be used and an appropriate
+	similarity threshold for the application must be set.</p>
+
+	eg.
+
+	CREATE TABLE test_trgm (t text);
+	CREATE INDEX trgm_idx ON test_trgm USING gist (t gist_trgm_ops);
+
+	<p>At this point, you will have an index on the t text column that you
+	can use for similarity searching.<p/>
+
+	eg.
+
+	SELECT
+		t,
+		similarity(t, 'word') AS sml
+	FROM
+		test_trgm
+	WHERE
+		t % 'word'
+	ORDER BY
+		sml DESC, t;
+
+	<p>This will return all values in the text column that are sufficiently
+	similar to 'word', sorted from best match to worst.  The index will
+	be used to make this a fast operation over very large data sets.</p>
+
+	<div class="flex flex-2">
+		<h4> Tsearch2 Integration </h4>
+	</div>
+
+
+	<p>Trigram matching is a very useful tool when used in conjunction
+	with a text index created by the Tsearch2 contrib module. (See
+	contrib/tsearch2)</p>
+
+	<p>The first step is to generate an auxiliary table containing all
+	the unique words in the Tsearch2 index:</P>
+
+	CREATE TABLE words AS SELECT word FROM
+		stat('SELECT to_tsvector(''simple'', bodytext) FROM documents');
+
+	<p>Where 'documents' is a table that has a text field 'bodytext'
+	that TSearch2 is used to search.  The use of the 'simple' dictionary
+	with the to_tsvector function, instead of just using the already
+	existing vector is to avoid creating a list of already stemmed
+	words.  This way, only the original, unstemmed words are added
+	to the word list.<p/>
+
+	Next, create a trigram index on the word column:
+
+	CREATE INDEX words_idx ON words USING gist(word gist_trgm_ops);
+
+	<p>Now, a SELECT query similar to the example above can be used to
+	suggest spellings for misspelled words in user search terms. A
+	useful extra clause is to ensure that the similar words are also
+	of similar length to the misspelled word.</p>
+
+	<p>Note: Since the 'words' table has been generated as a separate,
+	static table, it will need to be periodically regenerated so that
+	it remains up to date with the word list in the Tsearch2 index.</p> -->
+
+
+							<div class="flex flex-2">
+								<h2> Trigram Algorithm </h2>
+							</div>
+							<div class="flex flex-2">
+								<h4> Trigram production rules </h4>
+							</div>
+
+
+<p>Let STR be the string of characters that represent a phrase. STR is processed as follows.<p>
+
+1) STR is lower cased.<br />
+
+2) STR is broken into terms at spaces and these individual terms are used to produce trigrams. Strings of length k+3 produce k+1 overlapping trigrams, while any string of length 3 or shorter is taken as the only trigram produced (for simplicity we shall refer to it as a trigram even if it has only one or two letters). All such trigrams are attributes of STR.<br />
+
+3) The first trigram produced from each term derived from STR is marked at the right end by the addition of the symbol `!' and the result is included as an attribute with a local count of 2. Also the first letter of the term is marked by adding the character `#' to the right and included as an attribute. Finally between any two adjacent terms in the phrase the trigram which consists of the first letters separated by a space is added as an attribute.<br />
+
+<p>As an example consider the phrase "DNA sequence selectivity". This is lower cased to "dna sequence selectivity" and step 2) gives rise to the trigrams dna, seq, equ, que, uen, enc, nce, sel, ele, lec, ect, cti, tiv, ivi, vit, ity. Step 3) then adds the attributes dna!, d#, seq!, s#, sel!, s#, d s, s s.</p>
+
+
+<div class="flex flex-2">
+	<h4> The Similarity Score </h4>
+</div>
+
+<p>All attributes are given global weights of the form sqrt(log(N/nt)). These are relatively standard inverse document frequency weights. Here N represents the collection size, which in this case is the number of phrases in the set we are studying. The value nt is the frequency of occurrence throughout the collection of the attribute being weighted. Each attribute is also given a local weight which is log(1+ft) where ft is the number of times the attribute is seen in the particular phrase where the local weight is to be applied.</p>
+
+<p>When all attributes have been weighted then each phrase is represented by the vector of local times global weights for all attributes as computed for that phrase. As usual only those attributes that actually occur in a phrase have nonzero coordinates in this vector representation.</p>
+
+<div class="flex flex-2">
+	<h4> The Similarity Score </h4>
+</div>
+
+<p>The similarity between two phrases is then computed as the cosine of the angle between them. This is always a number between 0 and 1. We have found that when the score is roughly 0.7 or greater the probability becomes high that the two phrases are synonymous in meaning.</p>
+
+
+<div class="flex flex-2">
+	<h4> Application to Indexing </h4>
+</div>
+
+<p>For purposes of indexing we process according to the following algorithm:</p>
+
+1) Break the title and abstract of a document up into all possible phrases consisting of one to six contiguous words without punctuation occurring within.<br />
+
+2) For each phrase produced in 1) compute the score against all phrases in UMLS and record the phrase that obtains the highest score.<br />
+
+3) For each word in the title and abstract, record that phrase of which that word is a member and which receives the highest overall score against the UMLS and record also the UMLS phrase that produced that highest score.<br />
+
+4) For each phrase pair obtained in 3) where one element is a phrase in the document and the other is a phrase in UMLS, count how many times the pair appears in different places in the document and return the pair, their score, and the count.<br />
+
+							<!-- <div class="flex flex-2">
+									<h2> Trigram Algorithm </h2>
+									<p>Etiam posuere hendrerit arcu, ac blandit nulla. Sed congue malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet, enim magna cursus auctor lacinia nunc ex blandit augue. Ut vitae neque fermentum, luctus elit fermentum, porta augue. Nullam ultricies, turpis at fermentum iaculis, nunc justo dictum dui, non aliquet erat nibh non ex.</p>
+									<p>Sed congue malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet, enim magna cursus auctor lacinia nunc ex blandit augue. Ut vitae neque fermentum, luctus elit fermentum, porta augue. Nullam ultricies, turpis at fermentum iaculis, nunc justo dictum dui, non aliquet erat nibh non ex. Sed sollicitudin bibendum ultricies. Vivamus tristique justo lacinia dui tempus consequat. Integer tristique eu nisi nec fermentum. Ut malesuada quis massa at ultricies. Donec gravida ipsum in augue volutpat laoreet. Ut lobortis turpis sit amet sodales ultrices.</p>
+								<div class="col col1 first">
+									<div class="image round fit">
+										<a href="generic.html" class="link"><img src="images/pic02.jpg" alt="" /></a>
+									</div>
+								</div>
+							<p>Curabitur venenatis lorem ut finibus finibus. Ut quis eleifend libero, nec ultricies metus. Morbi magna risus, congue sit amet pellentesque eget, malesuada ut justo. Sed ac pretium quam. Ut vel ex vitae enim sagittis posuere ac id erat. Vestibulum vel ullamcorper tellus. Donec sapien massa, venenatis ac felis vel, vestibulum sagittis enim. Maecenas ut egestas lorem, nec luctus ligula. Vestibulum neque diam, aliquet non enim a, cursus lacinia metus. Aenean fringilla luctus rhoncus. Integer vulputate massa ac suscipit venenatis. Integer luctus elit non nulla fringilla, ullamcorper maximus sem congue. Integer tristique eu nisi nec fermentum. Ut malesuada quis massa at ultricies.</p>
+							<p>Donec molestie tellus eu tincidunt dignissim. Sed sollicitudin bibendum ultricies. Vivamus tristique justo lacinia dui tempus consequat. Sed hendrerit justo in nisl auctor, id rutrum tortor congue. Vivamus mattis nibh et sem rutrum, vel viverra purus viverra. Donec et justo at orci euismod hendrerit vel vel neque. Donec gravida ipsum in augue volutpat laoreet. Ut lobortis turpis sit amet sodales ultrices.</p>
+							</div> -->
+						</div>
+					</section>
+
+				<!-- Section -->
+					<!-- <section class="wrapper style1">
+						<div class="inner">
+							<header class="align-center">
+								<h2>Aliquam ipsum purus dolor</h2>
+								<p>Cras sagittis turpis sit amet est tempus, sit amet consectetur purus tincidunt.</p>
+							</header>
+							<div class="flex flex-3">
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic03.jpg" alt="" />
+									</div>
+									<p>Sed congue elit malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet. </p>
+									<a href="#" class="button">Learn More</a>
+								</div>
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic05.jpg" alt="" />
+									</div>
+									<p>Sed congue elit malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet. </p>
+									<a href="#" class="button">Learn More</a>
+								</div>
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic04.jpg" alt="" />
+									</div>
+									<p>Sed congue elit malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet. </p>
+									<a href="#" class="button">Learn More</a>
+								</div>
+							</div>
+						</div>
+					</section> -->
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					<ul class="icons">
+						<li><a href="https://twitter.com/Jishnu_ts" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com/jishnu.saseendran.1" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/jishnu_saseendran/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/JishnuSaseendran" class="icon fa-github"><span class="label">Snapchat</span></a></li>
+						<li><a href="https://www.linkedin.com/in/jishnu-t-s-10b922a9/" class="icon fa-linkedin"><span class="label">Snapchat</span></a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
