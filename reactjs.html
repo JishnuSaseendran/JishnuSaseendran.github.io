@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<!--
+    Urban by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title>ReactJS</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="subpage">
+
+        <!-- Header -->
+            <header id="header">
+                <!-- <div class="logo"><a href="index.html">Urban <span>by TEMPLATED</span></a></div> -->
+                <a href="#menu">Menu</a>
+            </header>
+
+        <!-- Nav -->
+            <nav id="menu">
+                <ul class="links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trigramsimilarity.html.html">Trigram Similarity</a></li>
+                    <li><a href="reactjs.html">ReactJS</a></li>
+                    <li><a href="jsx.html">JSX</a></li>
+                    <!-- <li><a href="elements.html">Elements</a></li> -->
+                </ul>
+            </nav>
+
+        <!-- Main -->
+            <div id="main">
+
+                <!-- Section -->
+                    <section class="wrapper">
+                        <div class="inner">
+                            <header class="align-center">
+                                <h1>ReactJS</h1>
+                                <p>November 25 2017</p>
+                            </header>
+<div class="flex flex-2">
+    <h4> Why ReactJS? </h4>
+</div>
+                                    <p>React (sometimes styled React.js or ReactJS) is a JavaScript library for building user interfaces.
+
+It is maintained by Facebook, Instagram and a community of individual developers and corporations. ReactJS is a library that generates the view layer of an application based on its state. ReactJS applications are built from React Components - independent resusable components that describe how the UI should look based on their own state and properties.</p>
+
+
+<ul>
+  <li>ReactJS applications are incredibly performant at UI rerendering</li>
+  <li>React Components make writing UI components easier
+</li>
+</ul>
+
+<div class="flex flex-2">
+    <h4> What makes ReactJS so efficient at rerendering? </h4>
+</div>
+
+
+                                
+                                <p>TReact Components are used to generate a Virtual DOM - a light-weight abstraction of the actual HTML DOM. The Virtual DOM is able to be generated much more quickly than the HTML DOM because it does not have to calculate CSS styles and layouts. When a React Component changes state, the Virtual DOM is recreated and the difference between the new Virtual DOM and the previous Virtual DOM is calculated. The ReactJS library then calculates the most efficient way to update the HTML DOM to reflect these changes. This ends up being much faster than regenerating the entire HTML DOM from the top.</p>
+                                <img src="images/virtualDOM.gif" alt="" >
+
+<div class="flex flex-2">
+    <h4> Declarative </h4>
+</div>
+
+
+                                
+                                <p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
+Declarative views make your code more predictable and easier to debug.</p>
+
+<div class="flex flex-2">
+    <h4> Component-Based </h4>
+</div>
+
+
+                                
+                                <p>Build encapsulated components that manage their own state, then compose them to make complex UIs.
+Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p>
+
+<div class="flex flex-2">
+    <h4> Learn Once, Write Anywhere </h4>
+</div>
+
+
+                                
+                                <p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.
+React can also render on the server using Node and power mobile apps using React Native.</p>
+
+<div class="flex flex-2">
+    <h4> A Simple Component </h4>
+</div>
+
+
+                                
+                                <p>React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props.</p>  
+
+<div class="flex flex-2">
+    <h4> A Stateful Component </h4>
+</div>
+
+
+                                
+                                <p>In addition to taking input data (accessed via this.props), a component can maintain internal state data (accessed via this.state). When a component’s state data changes, the rendered markup will be updated by re-invoking render().</p> 
+<div class="flex flex-2">
+    <h4> A Component Using External Plugins </h4>
+</div>
+
+
+                                
+                                <p>React is flexible and provides hooks that allow you to interface with other libraries and frameworks.</p>  
+
+
+<div class="flex flex-2">
+                                <h2> JSX </h2>
+                            </div>
+                            <div class="flex flex-2">
+                                <h4> What is JSX? </h4>
+                            </div>
+
+
+<p>JSX is a syntax extension to JavaScript that allows React Elements to be written inside JavaScript using HTML tags.<p>
+
+<p>JSX is a statically-typed, object-oriented programming language designed to run on modern web browsers. Being developed at DeNA as a research project.<p>
+
+<ul>
+  <li>Faster</h1></li>
+  <p>JSX performs optimization while compiling the source code to JavaScript. The generated code runs faster than an equivalent code written directly in JavaScript. <p>
+
+  <li>Safer</h1></li>
+  <p>In contrast to JavaScript, JSX is statically-typed and mostly type-safe. The quality of applications becomes higher when being developed using JSX, since many errors will be caught during the compilation process. It also offers debugging features at the compiler level as well.
+<p>
+  <li>Easier</h1></li>
+  <p>JSX offers a solid class system much like Java, freeing the developers from working with the too-primitive prototype-based inheritance system provided by JavaScript. Expressions and statements, however, are mostly equal to JavaScript, so it is easy for JavaScript programmers to start using JSX.<p>
+</ul>
+<p>Using JSX, we can create React Elements easily with HTML Tags:</p>
+<img src="images/jsx1.png" alt="" >
+<p>Without JSX, the process is much slower and more verbose:</p>
+<img src="images/jsx2.png" alt="" >
+<div class="flex flex-2">
+    <h4> Using JSX with JavaScript Expressions </h4>
+</div>
+<p>Curly braces can be used to embed JavaScript expressions into JSX.</p>
+
+<p>The following are all examples of valid JavaScript expressions in JSX:</p>
+<img src="images/jsx3.png" alt="" >
+<div class="flex flex-2">
+    <h2> Rendering Elements </h2>
+</div>
+<div class="flex flex-2">
+    <h4> React Elements </h4>   
+</div>
+
+
+<p>React Elements are objects that represent a DOM node. They are written using a syntax extension named JSX which we will cover later in this module. React Elements are different than React Components, which we will also cover later in this module.</p>
+<img src="images/js1.png" alt="" >
+
+<p>React Elements need to be rendered by the ReactDOM.render() method to appear in the DOM.</p>
+
+<div class="flex flex-2">
+                                <h4> ReactDOM.render()s </h4>
+                            </div>
+
+
+<p>The ReactDOM.render() method is used to render a React Element into a specified part of the HTML DOM. In most React applications, there is usually a single root node where everything gets rendered into, but you may use as many root nodes as you desire.
+
+In this case, the <h1>Hello World!</h1> React Element is rendered into the DOM element with the id of "root".<p>
+<img src="images/js2.png" alt="" >
+
+<div class="flex flex-2">
+                                <h4> Rerendering the DOM using additional render() calls </h4>
+                            </div>
+
+
+<ul>
+  <li>Once a DOM is rendered, it will remain the same until another render() method is called.</h1></li>
+  <li>The following example uses additional render() calls to update the displayed number:</h1></li>
+</ul>
+<img src="images/js3.png" alt="" >
+
+<div class="flex flex-2">
+                                <h2> Functional Components </h2>
+                            </div>
+                            <div class="flex flex-2">
+                                <h4> React Components </h4>
+                            </div>
+
+
+<p>A React Component is an independent reusable component that outputs a React Element based on its properties and state.</p>
+
+<p>There are two types of React Components:</p>
+<ul>
+  <li>Functional Components
+</h1></li>
+  <li>Class Components</h1></li>
+</ul>
+<p>Class Components have state, lifecycle methods, and properties while Functional Components only have properties. In this module, we will cover Functional Components while Class Components will be covered in Module 2.</p>
+
+
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="copyright">
+                    <ul class="icons">
+                        <li><a href="https://twitter.com/Jishnu_ts" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="https://www.facebook.com/jishnu.saseendran.1" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="https://www.instagram.com/jishnu_saseendran/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://github.com/JishnuSaseendran" class="icon fa-github"><span class="label">Snapchat</span></a></li>
+                        <li><a href="https://www.linkedin.com/in/jishnu-t-s-10b922a9/" class="icon fa-linkedin"><span class="label">Snapchat</span></a></li>
+                    </ul>
+                </div>
+            </footer>
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/skel.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>

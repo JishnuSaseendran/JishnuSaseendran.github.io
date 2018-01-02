@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<!--
+    Urban by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title>JSX & Rendering Elements</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="subpage">
+
+        <!-- Header -->
+            <header id="header">
+                <!-- <div class="logo"><a href="index.html">Urban <span>by TEMPLATED</span></a></div> -->
+                <a href="#menu">Menu</a>
+            </header>
+
+        <!-- Nav -->
+            <nav id="menu">
+                <ul class="links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trigramsimilarity.html.html">Trigram Similarity</a></li>
+                    <li><a href="reactjs.html">ReactJS</a></li>
+                    <li><a href="jsx.html">JSX & Rendering Elements</a></li>
+                    <!-- <li><a href="elements.html">Elements</a></li> -->
+                </ul>
+            </nav>
+
+        <!-- Main -->
+            <div id="main">
+
+                <!-- Section -->
+                    <section class="wrapper">
+                        <div class="inner">
+                            <header class="align-center">
+                                <h1>JSX & Rendering Elements</h1>
+                                <p>December 03   2017</p>
+                            </header>
+
+
+                            <div class="flex flex-2">
+    <h2> Introducing JSX </h2>
+</div>
+<div class="flex flex-2">
+    <h4> Why ReactJS? </h4>
+</div>
+                                    <p>This funny tag syntax is neither a string nor HTML.</p>
+                                    <img src="images/jsx_1.png" alt="" >
+ <p>It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.</p>
+ <p>React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display. Instead of artificially separating technologies by putting markup and logic in separate files, React separates concerns with loosely coupled units called “components” that contain both. </p>
+ <p>React doesn’t require using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.</p>
+
+<div class="flex flex-2">
+    <h4> Embedding Expressions in JSX
+ </h4>
+</div>
+
+
+                                
+                                <p>Any JavaScript expression in JSX can be embed by wrapping it in curly braces.</p>
+                                <p>For example, 2 + 2, user.firstName, and formatName(user) are all valid expressions:</p>
+                                <img src="images/jsx_2.png" alt="" >
+                                <p>JSX splits over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of automatic semicolon insertion.</p>
+
+<div class="flex flex-2">
+    <h4> JSX is an Expression Too
+ </h4>
+</div>
+
+
+                                
+                                <p>After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.</p>
+                                <p>This means that JSX can use inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:
+</p>
+                                <img src="images/jsx_3.png" alt="" >
+                                
+
+<div class="flex flex-2">
+    <h4> Specifying Attributes with JSX
+ </h4>
+</div>
+
+
+                                
+                                <p>Quotes are used to specify string literals as attributes:</p>
+                                <img src="images/jsx_4.png" alt="" >
+                                <p>Curly braces are used to embed a JavaScript expression in an attribute:
+</p>
+                                <img src="images/jsx_5.png" alt="" >
+                                <p>Don’t put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.</p>
+                                <p>Since JSX is closer to JavaScript than HTML, React DOM uses camelCase property naming convention instead of HTML attribute names.</p>
+                                <ul>
+  <li>For example, class becomes className in JSX, and tabindex becomes tabIndex.
+</li>
+</ul>
+
+<div class="flex flex-2">
+    <h4> Specifying Children with JSX
+ </h4>
+</div>
+
+
+                                
+                                <p>If a tag is empty, immediately with />, like XML:</p>
+                                <img src="images/jsx_6.png" alt="" >
+                                <p>JSX tags may contain children:
+</p>
+                                <img src="images/jsx_7.png" alt="" >
+
+
+<div class="flex flex-2">
+    <h4> JSX Prevents Injection Attacks
+ </h4>
+</div>
+
+
+                                
+                                <p>It is safe to embed user input in JSX:
+</p>
+                                <img src="images/jsx_8.png" alt="" >
+                                <p>By default, React DOM escapes any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent XSS (cross-site-scripting) attacks.
+</p>
+           
+
+
+<div class="flex flex-2">
+    <h4> JSX Represents Objects
+ </h4>
+</div>
+
+
+                                
+                                <p>Babel compiles JSX down to React.createElement() calls.  
+</p>
+<p>These two examples are identical:</p>
+                                <img src="images/jsx_9.png" alt="" >
+                                <img src="images/jsx_10.png" alt="" >
+                                <p>React.createElement() performs a few checks to help you write bug-free code but essentially it creates an object like this:</p>       
+                                <img src="images/jsx_11.png" alt="" >
+                                <p>These objects are called “React elements”. These are descriptions of what are required to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.</p>             
+
+
+
+<div class="flex flex-2">
+    <h2> Rendering Elements </h2>
+</div>
+
+<p>Elements are the smallest building blocks of React apps.</p>
+<p>An element describes what you want to see on the screen:</p>
+<img src="images/re_1.png" alt="" >
+<p>Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.</p>
+
+
+<div class="flex flex-2">
+    <h4> Rendering an Element into the DOM
+ </h4>
+</div>
+
+
+                                
+                                <p>Select a <div> somewhere in HTML file:
+</p>
+                                <img src="images/re_2.png" alt="" >
+                                <p>Call this a “root” DOM node because everything inside it will be managed by React DOM.</p>
+<p>Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.</p>
+<p>To render a React element into a root DOM node, pass both to ReactDOM.render():
+</p>
+<img src="images/re_3.png" alt="" >
+
+
+<div class="flex flex-2">
+    <h4> Updating the Rendered Element
+ </h4>
+</div>
+
+
+                                
+                                <p>React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.</p>
+<p>With our knowledge so far, the only way to update the UI is to create a new element, and pass it to ReactDOM.render().</p>
+<p>Consider this ticking clock example:
+</p>
+                                <img src="images/re_4.png" alt="" >
+                                <p>It calls ReactDOM.render() every second from a setInterval() callback.</p>
+
+<div class="flex flex-2">
+    <h4> React Only Updates What’s Necessary
+ </h4>
+</div>
+
+
+                                
+                                <p>React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.</p>
+                                <img src="images/re01.gif" alt="" >
+                                <p>Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM.</p>
+
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="copyright">
+                    <ul class="icons">
+                        <li><a href="https://twitter.com/Jishnu_ts" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="https://www.facebook.com/jishnu.saseendran.1" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="https://www.instagram.com/jishnu_saseendran/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://github.com/JishnuSaseendran" class="icon fa-github"><span class="label">Snapchat</span></a></li>
+                        <li><a href="https://www.linkedin.com/in/jishnu-t-s-10b922a9/" class="icon fa-linkedin"><span class="label">Snapchat</span></a></li>
+                    </ul>
+                </div>
+            </footer>
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/skel.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>
